@@ -1,0 +1,11 @@
+/seedlog
+/seedlog.exe
+/dist/
+*.test
+*.prof
+*.out
+/bench/*.cpu
+/study/runs/
+/stress/runs/
+__pycache__/
+testdata/fuzz/
