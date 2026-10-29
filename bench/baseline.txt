@@ -1,0 +1,7 @@
+goos: windows
+goarch: amd64
+pkg: github.com/aceqbit/seedlog/sim
+cpu: 13th Gen Intel(R) Core(TM) i5-1335U
+BenchmarkSeed-12    	      20	  36934965 ns/op	     79514 events/seed	       464.5 ns/event	      1624 sim-s/s	24077632 B/op	   41674 allocs/op
+PASS
+ok  	github.com/aceqbit/seedlog/sim	1.967s
