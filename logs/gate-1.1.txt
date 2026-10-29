@@ -1,0 +1,5 @@
+seeds=1000 pass=1000 violations=0 unknown/budget=0 wall=1.9s events/s=6213996 sim-s/wall-s=2651
+coverage: 18/46 points hit (39.1%)
+faults: drop=0 dup=0 reorder=0 partition=0 crash=0 pause=0 skew=0 torn=0 lost_fsync=0
+gate-1.1 hashes identical across two runs
+finished

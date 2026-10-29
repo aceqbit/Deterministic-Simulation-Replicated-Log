@@ -1,0 +1,12 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/5 completed
+fuzz: elapsed: 1s, gathering baseline coverage: 5/5 completed, now fuzzing with 12 workers
+fuzz: elapsed: 3s, execs: 74487 (24781/sec), new interesting: 65 (total: 70)
+fuzz: elapsed: 6s, execs: 235382 (53708/sec), new interesting: 85 (total: 90)
+fuzz: elapsed: 9s, execs: 390620 (51694/sec), new interesting: 92 (total: 97)
+fuzz: elapsed: 12s, execs: 475122 (28158/sec), new interesting: 98 (total: 103)
+fuzz: elapsed: 15s, execs: 527375 (17430/sec), new interesting: 103 (total: 108)
+fuzz: elapsed: 18s, execs: 724046 (65544/sec), new interesting: 110 (total: 115)
+fuzz: elapsed: 21s, execs: 749203 (8394/sec), new interesting: 112 (total: 117)
+fuzz: elapsed: 21s, execs: 749203 (0/sec), new interesting: 112 (total: 117)
+PASS
+ok  	github.com/aceqbit/seedlog/runtime	25.033s

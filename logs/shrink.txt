@@ -1,0 +1,60 @@
+== bug 1 seed 351
+signature=election_safety/two_leaders_same_term events 17786 -> 217 (98.8% removed) draws 37513 -> 619 attempts=2000 kept=1668 time=67.5s
+schedule: shrink/schedules/bug1.json
+reproduce: seedlog replay --schedule shrink/schedules/bug1.json
+schedule shrink/schedules/bug1.json: events=217 signature="election_safety/two_leaders_same_term" violation election_safety/two_leaders_same_term: nodes 3 and 1 both lead term 6
+reproduced election_safety/two_leaders_same_term
+== bug 2 seed 1
+signature=leader_completeness/leader_missing_committed_entry events 8383 -> 176 (97.9% removed) draws 17273 -> 578 attempts=2000 kept=1505 time=63.6s
+schedule: shrink/schedules/bug2.json
+reproduce: seedlog replay --schedule shrink/schedules/bug2.json
+schedule shrink/schedules/bug2.json: events=176 signature="leader_completeness/leader_missing_committed_entry" violation leader_completeness/leader_missing_committed_entry: leader of term 6 lacks committed index 1
+reproduced leader_completeness/leader_missing_committed_entry
+== bug 3 seed 1
+signature=state_machine_safety/old_term_entry_committed_by_count events 15421 -> 197 (98.7% removed) draws 28571 -> 577 attempts=2000 kept=1412 time=136.3s
+schedule: shrink/schedules/bug3.json
+reproduce: seedlog replay --schedule shrink/schedules/bug3.json
+schedule shrink/schedules/bug3.json: events=197 signature="state_machine_safety/old_term_entry_committed_by_count" violation state_machine_safety/old_term_entry_committed_by_count: leader of term 3 committed index 5, an older-term entry, by replica count
+reproduced state_machine_safety/old_term_entry_committed_by_count
+== bug 4 seed 1
+signature=state_machine_safety/committed_entry_truncated events 184 -> 47 (74.5% removed) draws 484 -> 200 attempts=2000 kept=1908 time=1.2s
+schedule: shrink/schedules/bug4.json
+reproduce: seedlog replay --schedule shrink/schedules/bug4.json
+schedule shrink/schedules/bug4.json: events=47 signature="state_machine_safety/committed_entry_truncated" violation state_machine_safety/committed_entry_truncated: node committed through 1 but truncated from 1
+reproduced state_machine_safety/committed_entry_truncated
+== bug 5 seed 1
+signature=election_safety/two_leaders_same_term events 5874 -> 97 (98.3% removed) draws 12292 -> 347 attempts=2000 kept=1669 time=74.3s
+schedule: shrink/schedules/bug5.json
+reproduce: seedlog replay --schedule shrink/schedules/bug5.json
+schedule shrink/schedules/bug5.json: events=97 signature="election_safety/two_leaders_same_term" violation election_safety/two_leaders_same_term: nodes 4 and 1 both lead term 2
+reproduced election_safety/two_leaders_same_term
+== bug 6 seed 1
+signature=commit_bound/commit_past_last_index events 2483 -> 841 (66.1% removed) draws 5267 -> 2597 attempts=2000 kept=837 time=217.2s
+schedule: shrink/schedules/bug6.json
+reproduce: seedlog replay --schedule shrink/schedules/bug6.json
+schedule shrink/schedules/bug6.json: events=841 signature="commit_bound/commit_past_last_index" violation commit_bound/commit_past_last_index: commit 5 beyond last index 4
+reproduced commit_bound/commit_past_last_index
+== bug 7 seed 1
+signature=linearizability/history_not_linearizable events 51876 -> 51876 (0.0% removed) draws 89027 -> 89027 attempts=2000 kept=0 time=219.5s
+schedule: shrink/schedules/bug7.json
+reproduce: seedlog replay --schedule shrink/schedules/bug7.json
+schedule shrink/schedules/bug7.json: events=51876 signature="linearizability/history_not_linearizable" violation linearizability/history_not_linearizable: no valid linearization of 2100 operations
+reproduced linearizability/history_not_linearizable
+== bug 8 seed 1744
+seedlog: open shrink/schedules/bug8.json: The system cannot find the file specified.
+== bug 9 seed 1
+signature=linearizability/history_not_linearizable events 49122 -> 49122 (0.0% removed) draws 77553 -> 77553 attempts=2000 kept=0 time=254.4s
+schedule: shrink/schedules/bug9.json
+reproduce: seedlog replay --schedule shrink/schedules/bug9.json
+schedule shrink/schedules/bug9.json: events=49122 signature="linearizability/history_not_linearizable" violation linearizability/history_not_linearizable: no valid linearization of 1408 operations
+reproduced linearizability/history_not_linearizable
+== bug 10 seed 2402
+signature=wal_recovery/checksum_failing_record_accepted events 34356 -> 1046 (97.0% removed) draws 81952 -> 2670 attempts=2000 kept=1328 time=152.1s
+schedule: shrink/schedules/bug10.json
+reproduce: seedlog replay --schedule shrink/schedules/bug10.json
+schedule shrink/schedules/bug10.json: events=1046 signature="wal_recovery/checksum_failing_record_accepted" violation wal_recovery/checksum_failing_record_accepted: recovery accepted a record with a bad checksum
+reproduced wal_recovery/checksum_failing_record_accepted
+hecksum
+reproduced wal_recovery/checksum_failing_record_accepted
+finished
+finished

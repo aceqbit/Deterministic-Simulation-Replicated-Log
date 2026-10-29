@@ -1,0 +1,25 @@
+fuzz: elapsed: 0s, gathering baseline coverage: 0/3 completed
+fuzz: elapsed: 1s, gathering baseline coverage: 3/3 completed, now fuzzing with 12 workers
+fuzz: elapsed: 3s, execs: 274728 (91503/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 6s, execs: 687260 (137154/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 9s, execs: 1103878 (139265/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 12s, execs: 1526755 (140184/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 15s, execs: 1698772 (57404/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 18s, execs: 1870953 (57661/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 21s, execs: 2075900 (68158/sec), new interesting: 4 (total: 7)
+fuzz: elapsed: 24s, execs: 2489622 (138254/sec), new interesting: 5 (total: 8)
+fuzz: elapsed: 27s, execs: 2736393 (82089/sec), new interesting: 5 (total: 8)
+fuzz: elapsed: 30s, execs: 3596859 (287287/sec), new interesting: 5 (total: 8)
+fuzz: elapsed: 33s, execs: 3930734 (111309/sec), new interesting: 5 (total: 8)
+fuzz: elapsed: 36s, execs: 4745486 (271645/sec), new interesting: 6 (total: 9)
+fuzz: elapsed: 39s, execs: 5086624 (113287/sec), new interesting: 6 (total: 9)
+fuzz: elapsed: 42s, execs: 5402415 (105638/sec), new interesting: 7 (total: 10)
+fuzz: elapsed: 45s, execs: 5680232 (92614/sec), new interesting: 7 (total: 10)
+fuzz: elapsed: 48s, execs: 5959247 (92416/sec), new interesting: 7 (total: 10)
+fuzz: elapsed: 51s, execs: 6321713 (121520/sec), new interesting: 7 (total: 10)
+fuzz: elapsed: 54s, execs: 6689020 (122401/sec), new interesting: 8 (total: 11)
+fuzz: elapsed: 57s, execs: 6940448 (83591/sec), new interesting: 11 (total: 14)
+fuzz: elapsed: 1m0s, execs: 7173898 (78075/sec), new interesting: 11 (total: 14)
+fuzz: elapsed: 1m1s, execs: 7173898 (0/sec), new interesting: 11 (total: 14)
+PASS
+ok  	github.com/aceqbit/seedlog/wal	63.984s

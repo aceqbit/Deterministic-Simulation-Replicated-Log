@@ -1,0 +1,3 @@
+seeds=10000 pass=10000 violations=0 unknown/budget=0 wall=159.8s events/s=4848318 sim-s/wall-s=3755
+coverage: 46/46 points hit (100.0%)
+faults: drop=7638422 dup=4987904 reorder=9565109 partition=121122 crash=323798 pause=86190 skew=27790 torn=30191 lost_fsync=31187

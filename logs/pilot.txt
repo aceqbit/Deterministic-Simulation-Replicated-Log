@@ -1,0 +1,11 @@
+bug  1 vote_before_persist  seeds_to_detect=351 first=election_safety/two_leaders_same_term expected=election_safety
+bug  2 skip_uptodate_check  seeds_to_detect=1 first=leader_completeness/leader_missing_committed_entry expected=leader_completeness
+bug  3 fig8_commit          seeds_to_detect=1 first=state_machine_safety/old_term_entry_committed_by_count expected=state_machine_safety
+bug  4 truncate_always      seeds_to_detect=1 first=state_machine_safety/committed_entry_truncated expected=log_matching
+bug  5 no_stepdown          seeds_to_detect=1 first=election_safety/two_leaders_same_term expected=liveness
+bug  6 commit_past_end      seeds_to_detect=1 first=commit_bound/commit_past_last_index expected=commit_bound
+bug  7 stale_leader_read    seeds_to_detect=1 first=linearizability/history_not_linearizable expected=linearizability
+bug  8 ack_before_fsync     seeds_to_detect=1744 first=leader_completeness/leader_missing_committed_entry expected=ack_ledger
+bug  9 double_apply_retry   seeds_to_detect=1 first=linearizability/history_not_linearizable expected=linearizability
+bug 10 accept_torn_tail     seeds_to_detect=2402 first=wal_recovery/checksum_failing_record_accepted expected=wal_recovery
+finished

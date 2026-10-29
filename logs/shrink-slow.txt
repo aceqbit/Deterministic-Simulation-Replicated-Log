@@ -1,0 +1,19 @@
+== bug 7 seed 1
+signature=linearizability/history_not_linearizable events 51876 -> 51876 (0.0% removed) draws 89027 -> 89027 attempts=150 kept=0 time=19.6s
+schedule: shrink/schedules/bug7.json
+reproduce: seedlog replay --schedule shrink/schedules/bug7.json
+schedule shrink/schedules/bug7.json: events=51876 signature="linearizability/history_not_linearizable" violation linearizability/history_not_linearizable: no valid linearization of 2100 operations
+reproduced linearizability/history_not_linearizable
+== bug 8 seed 1744
+signature=leader_completeness/leader_missing_committed_entry events 21411 -> 21411 (0.0% removed) draws 40973 -> 40973 attempts=150 kept=0 time=49.8s
+schedule: shrink/schedules/bug8.json
+reproduce: seedlog replay --schedule shrink/schedules/bug8.json
+schedule shrink/schedules/bug8.json: events=21411 signature="leader_completeness/leader_missing_committed_entry" violation leader_completeness/leader_missing_committed_entry: leader of term 119 lacks committed index 703
+reproduced leader_completeness/leader_missing_committed_entry
+== bug 9 seed 1
+signature=linearizability/history_not_linearizable events 49122 -> 49122 (0.0% removed) draws 77553 -> 77553 attempts=150 kept=0 time=26.4s
+schedule: shrink/schedules/bug9.json
+reproduce: seedlog replay --schedule shrink/schedules/bug9.json
+schedule shrink/schedules/bug9.json: events=49122 signature="linearizability/history_not_linearizable" violation linearizability/history_not_linearizable: no valid linearization of 1408 operations
+reproduced linearizability/history_not_linearizable
+finished

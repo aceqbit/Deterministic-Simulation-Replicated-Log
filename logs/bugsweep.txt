@@ -1,0 +1,16 @@
+== bug 1
+seeds=137 pass=136 violations=1 unknown/budget=0 wall=1.8s events/s=6364449 sim-s/wall-s=4520
+FIRST FAILURE detector=leader_completeness invariant=leader_missing_committed_entry seed=132 events=35331
+  leader of term 88 lacks committed index 820
+== bug 3
+seeds=987 pass=986 violations=1 unknown/budget=0 wall=18.2s events/s=4584908 sim-s/wall-s=3255
+FIRST FAILURE detector=state_machine_safety invariant=committed_entry_truncated seed=981 events=48748
+  committed index 1586 removed from log
+== bug 8
+seeds=889 pass=859 violations=1 unknown/budget=29 wall=140.3s events/s=1565416 sim-s/wall-s=372
+FIRST FAILURE detector=leader_completeness invariant=leader_missing_committed_entry seed=888 events=78170
+  leader of term 72 lacks committed index 2918
+== bug 10
+seeds=984 pass=983 violations=1 unknown/budget=0 wall=20.4s events/s=4080809 sim-s/wall-s=2895
+FIRST FAILURE detector=state_machine_safety invariant=committed_entry_truncated seed=981 events=48748
+  committed index 1586 removed from log
