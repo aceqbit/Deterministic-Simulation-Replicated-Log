@@ -1,0 +1,46 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go vet ./...
+      - run: go install honnef.co/go/tools/cmd/staticcheck@latest
+      - run: staticcheck ./...
+      - run: go test -race ./...
+      - uses: golangci/golangci-lint-action@v6
+        if: matrix.os == 'ubuntu-latest'
+  hashes:
+    strategy:
+      matrix:
+        include:
+          - {os: ubuntu-latest, goarch: amd64}
+          - {os: ubuntu-24.04-arm, goarch: arm64}
+          - {os: windows-latest, goarch: amd64}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: go run ./cmd/seedlog sim --seeds 200 --hash-only > hashes-${{ matrix.os }}.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hashes-${{ matrix.os }}
+          path: hashes-*.txt
+  compare:
+    needs: hashes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+      - run: |
+          cd .. && ls -R . | head -20
+          f=$(ls $GITHUB_WORKSPACE/hashes-*/hashes-*.txt)
+          for x in $f; do cmp $x $(echo $f | cut -d' ' -f1); done

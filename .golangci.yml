@@ -1,0 +1,29 @@
+version: "2"
+linters:
+  default: standard
+  enable:
+    - depguard
+  settings:
+    depguard:
+      rules:
+        pure:
+          files:
+            - "**/core/*.go"
+            - "**/kv/*.go"
+            - "**/wal/*.go"
+            - "!$test"
+          deny:
+            - pkg: time
+              desc: pure packages take time as Tick events
+            - pkg: math/rand
+              desc: randomness lives in sim ChoiceSource
+            - pkg: math/rand/v2
+              desc: randomness lives in sim ChoiceSource
+            - pkg: os
+              desc: pure packages do no I/O
+            - pkg: net
+              desc: pure packages do no I/O
+            - pkg: sync
+              desc: pure packages have no goroutines
+            - pkg: github.com/aceqbit/seedlog/telemetry
+              desc: telemetry observes through Observations
