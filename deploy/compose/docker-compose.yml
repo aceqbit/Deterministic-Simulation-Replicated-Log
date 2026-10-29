@@ -1,0 +1,41 @@
+services:
+  node0:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["node", "--id", "0", "--peers", "node0:7000,node1:7000,node2:7000,node3:7000,node4:7000", "--http", ":8080", "--data", "/data"]
+    volumes: ["data0:/data"]
+    cap_add: [NET_ADMIN]
+    ports: ["8080:8080"]
+  node1:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["node", "--id", "1", "--peers", "node0:7000,node1:7000,node2:7000,node3:7000,node4:7000", "--http", ":8080", "--data", "/data"]
+    volumes: ["data1:/data"]
+    cap_add: [NET_ADMIN]
+    ports: ["8081:8080"]
+  node2:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["node", "--id", "2", "--peers", "node0:7000,node1:7000,node2:7000,node3:7000,node4:7000", "--http", ":8080", "--data", "/data"]
+    volumes: ["data2:/data"]
+    cap_add: [NET_ADMIN]
+    ports: ["8082:8080"]
+  node3:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["node", "--id", "3", "--peers", "node0:7000,node1:7000,node2:7000,node3:7000,node4:7000", "--http", ":8080", "--data", "/data"]
+    volumes: ["data3:/data"]
+    cap_add: [NET_ADMIN]
+    ports: ["8083:8080"]
+  node4:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["node", "--id", "4", "--peers", "node0:7000,node1:7000,node2:7000,node3:7000,node4:7000", "--http", ":8080", "--data", "/data"]
+    volumes: ["data4:/data"]
+    cap_add: [NET_ADMIN]
+    ports: ["8084:8080"]
+  workload:
+    build: {context: ../.., dockerfile: Dockerfile}
+    command: ["workload", "--targets", "node0:8080,node1:8080,node2:8080,node3:8080,node4:8080"]
+    depends_on: [node0, node1, node2, node3, node4]
+volumes:
+  data0: {}
+  data1: {}
+  data2: {}
+  data3: {}
+  data4: {}

@@ -1,0 +1,6 @@
+apiVersion: 1
+providers:
+  - name: seedlog
+    type: file
+    options:
+      path: /var/lib/grafana/dashboards

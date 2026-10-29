@@ -1,0 +1,6 @@
+global:
+  scrape_interval: 15s
+otlp:
+  promote_resource_attributes:
+    - service.name
+    - service.instance.id

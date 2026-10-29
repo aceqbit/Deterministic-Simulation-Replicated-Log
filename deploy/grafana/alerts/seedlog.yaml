@@ -1,0 +1,119 @@
+apiVersion: 1
+groups:
+  - orgId: 1
+    name: seedlog
+    folder: SeedLog
+    interval: 10s
+    rules:
+      - uid: explorer_violation
+        title: Explorer violation
+        condition: C
+        for: 0s
+        labels:
+          severity: critical
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'increase(seedlog_sim_violations_total[5m])', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: throughput_regression
+        title: Throughput regression
+        condition: C
+        for: 5m
+        labels:
+          severity: warning
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'sum(rate(seedlog_sim_seeds_total[5m])) / avg_over_time(sum(rate(seedlog_sim_seeds_total[5m]))[7d:1h]) < bool 0.7', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: no_leader
+        title: No leader
+        condition: C
+        for: 5s
+        labels:
+          severity: critical
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'absent(seedlog_raft_role{role="leader"} == 1)', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: leader_flapping
+        title: Leader flapping
+        condition: C
+        for: 0s
+        labels:
+          severity: warning
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'increase(seedlog_raft_leader_changes_total[1m]) > bool 3', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: apply_lag
+        title: Apply lag
+        condition: C
+        for: 30s
+        labels:
+          severity: warning
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: '(seedlog_raft_commit_index - seedlog_raft_applied_index) > bool 1000', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: slow_fsync
+        title: Slow fsync
+        condition: C
+        for: 1m
+        labels:
+          severity: warning
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'histogram_quantile(0.99, sum by (le) (rate(seedlog_wal_fsync_duration_seconds_bucket[1m]))) > bool 0.05', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
+      - uid: error_ratio
+        title: Error ratio
+        condition: C
+        for: 1m
+        labels:
+          severity: warning
+        noDataState: NoData
+        execErrState: Error
+        data:
+          - refId: A
+            relativeTimeRange: {from: 300, to: 0}
+            datasourceUid: prometheus
+            model: {expr: 'sum(rate(seedlog_kv_requests_total{outcome!="ok"}[1m])) / sum(rate(seedlog_kv_requests_total[1m])) > bool 0.01', refId: A}
+          - refId: C
+            datasourceUid: __expr__
+            model: {type: threshold, expression: A, refId: C, conditions: [{evaluator: {type: gt, params: [0]}}]}
