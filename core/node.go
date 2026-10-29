@@ -304,7 +304,7 @@ func (n *Node) truncate(from uint64) {
 		n.marks[i].last = min(n.marks[i].last, from-1)
 	}
 	n.durable = min(n.durable, from-1)
-	n.emit(Observation{Kind: ObsTruncate, Index: from})
+	n.emit(Observation{Kind: ObsTruncate, Index: from, Term: n.term})
 }
 
 func (n *Node) onMessage(m *Message) {
@@ -364,7 +364,7 @@ func (n *Node) onRequestVote(m *Message) {
 		n.emit(Observation{Kind: ObsVoteRejectedLog, Term: n.term, A: uint64(m.From)})
 	}
 	n.emit(Observation{Kind: ObsRPC, A: uint64(MsgRequestVote), B: rpcResult(grant, false)})
-	gate := !(grant && n.cfg.Bugs.VoteBeforePersist)
+	gate := !grant || !n.cfg.Bugs.VoteBeforePersist
 	n.send(Message{Type: MsgVoteReply, To: m.From, Term: n.term, Granted: grant}, gate)
 }
 
@@ -454,11 +454,17 @@ func (n *Node) onAppendReply(m *Message) {
 	p := m.From
 	n.inflight[p] = false
 	if m.Granted {
-		if m.Match > n.match[p] {
+		progress := m.Match > n.match[p]
+		if progress {
 			n.match[p] = m.Match
 		}
 		n.next[p] = max(n.next[p], n.match[p]+1)
 		n.maybeCommit()
+		if !progress {
+			// A duplicate or reordered ack must not start a second send
+			// pipeline; the next heartbeat or client write resumes sending.
+			return
+		}
 	} else {
 		nx := n.next[p] - 1
 		if m.Hint > 0 && m.Hint < n.next[p] {

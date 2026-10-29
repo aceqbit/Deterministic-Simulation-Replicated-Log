@@ -14,7 +14,7 @@ func TestEncodeRecoverRoundTrip(t *testing.T) {
 		{HardState: true, Term: 1, Vote: 2},
 		{Entries: []Entry{{1, 1, c}, {1, 2, c}, {1, 3, c}}},
 		{HardState: true, Term: 2, Vote: None, Truncate: true, TruncateFrom: 3, Entries: []Entry{{2, 3, c}}},
-		{Entries: []Entry{{2, 2, c}}}, // implicit truncation of the suffix
+		{Entries: []Entry{{2, 2, c}}},     // implicit truncation of the suffix
 		{Truncate: true, TruncateFrom: 9}, // beyond the end: no-op
 	}
 	var img []byte

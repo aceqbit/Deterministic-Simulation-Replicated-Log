@@ -226,27 +226,27 @@ type ObsKind uint8
 
 // Observation kinds. The comment lists the fields each kind sets.
 const (
-	ObsState          ObsKind = iota // Term, A=role
-	ObsAppend                        // Index, Term, A=command hash
-	ObsTruncate                      // Index: first removed index
-	ObsCommit                        // Index: new commit index
-	ObsApply                         // Index, Term, A=command hash
-	ObsRestore                       // Index: last recovered index, Term
-	ObsElectionStart                 // Term
-	ObsVoteGranted                   // Term, A=candidate
-	ObsVoteRejectedLog               // Term, A=candidate
-	ObsVoteRejectedVoted             // Term, A=candidate
-	ObsAppendReject                  // Index: prevIndex, A=1 missing, 2 term mismatch
-	ObsStaleTerm                     // Term of the stale message
-	ObsHeartbeat                     // Term
-	ObsBatch                         // Index: entries in one AppendEntries
-	ObsDedupHit                      // Index
-	ObsNotLeader                     //
-	ObsGated                         // A=held outputs
-	ObsLocalRead                     // A=key
-	ObsStepDown                      // Term, A=old role
-	ObsRPC                           // A=MsgType of request, B=0 ok, 1 reject, 2 conflict
-	ObsCommitOldTerm                 // Index committed while it held an older term
+	ObsState             ObsKind = iota // Term, A=role
+	ObsAppend                           // Index, Term, A=command hash
+	ObsTruncate                         // Index: first removed index, Term: node term (the sending leader's)
+	ObsCommit                           // Index: new commit index
+	ObsApply                            // Index, Term, A=command hash
+	ObsRestore                          // Index: last recovered index, Term
+	ObsElectionStart                    // Term
+	ObsVoteGranted                      // Term, A=candidate
+	ObsVoteRejectedLog                  // Term, A=candidate
+	ObsVoteRejectedVoted                // Term, A=candidate
+	ObsAppendReject                     // Index: prevIndex, A=1 missing, 2 term mismatch
+	ObsStaleTerm                        // Term of the stale message
+	ObsHeartbeat                        // Term
+	ObsBatch                            // Index: entries in one AppendEntries
+	ObsDedupHit                         // Index
+	ObsNotLeader                        //
+	ObsGated                            // A=held outputs
+	ObsLocalRead                        // A=key
+	ObsStepDown                         // Term, A=old role
+	ObsRPC                              // A=MsgType of request, B=0 ok, 1 reject, 2 conflict
+	ObsCommitOldTerm                    // Index committed while it held an older term
 	NumObsKinds
 )
 
